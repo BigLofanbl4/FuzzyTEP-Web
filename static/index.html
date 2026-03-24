@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FuzzyTEP Web</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Курсовой проект</p>
+          <h1>Веб-платформа для анализа технико-экономических показателей предприятия</h1>
+          <p class="hero-text">
+            Система помогает оценивать состояние предприятия по ключевым показателям
+            и объясняет итог с помощью нечеткой модели.
+          </p>
+          <div class="hero-actions">
+            <button class="primary-button" id="create-enterprise-trigger">Добавить предприятие</button>
+            <a class="secondary-link" href="#analysis-section">Перейти к анализу</a>
+          </div>
+        </div>
+        <div class="hero-panel">
+          <div class="stat-card">
+            <span>Предприятий</span>
+            <strong id="stat-enterprises">0</strong>
+          </div>
+          <div class="stat-card">
+            <span>Анализов</span>
+            <strong id="stat-analyses">0</strong>
+          </div>
+          <div class="stat-card">
+            <span>Средняя оценка</span>
+            <strong id="stat-average">0</strong>
+          </div>
+        </div>
+      </header>
+
+      <main class="workspace">
+        <aside class="sidebar">
+          <div class="section-head">
+            <h2>Предприятия</h2>
+            <button class="ghost-button" id="sidebar-create-trigger">Новое</button>
+          </div>
+          <div id="enterprise-list" class="enterprise-list"></div>
+        </aside>
+
+        <section class="content">
+          <div class="content-top" id="content-top">
+            <div>
+              <p class="eyebrow">Карточка предприятия</p>
+              <h2 id="enterprise-title">Выберите предприятие</h2>
+              <p id="enterprise-subtitle" class="muted">
+                После выбора здесь появятся данные предприятия, форма анализа и история результатов.
+              </p>
+            </div>
+            <div class="content-actions" id="content-actions" hidden>
+              <button class="ghost-button" id="edit-enterprise-trigger">Редактировать</button>
+              <button class="danger-button" id="delete-enterprise-trigger">Удалить</button>
+            </div>
+          </div>
+
+          <section class="panel" id="enterprise-profile">
+            <div class="empty-state" id="profile-empty">
+              Создайте первое предприятие, чтобы начать работу.
+            </div>
+            <div id="profile-content" hidden>
+              <div class="info-grid">
+                <div class="info-card">
+                  <span>Профиль оценки</span>
+                  <strong id="enterprise-profile"></strong>
+                </div>
+                <div class="info-card">
+                  <span>Форма собственности</span>
+                  <strong id="enterprise-ownership"></strong>
+                </div>
+                <div class="info-card wide">
+                  <span>Описание</span>
+                  <p id="enterprise-description"></p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="panel" id="analysis-section">
+            <div class="section-head">
+              <h3>Анализ показателей</h3>
+              <p class="muted">Введите значения за период и получите итоговую оценку предприятия.</p>
+            </div>
+            <div class="model-note">
+              <div class="model-note-card">
+                <span>Что показывает система</span>
+                <strong>Не просто цифры, а состояние бизнеса</strong>
+                <p>
+                  Система оценивает не размер бизнеса сам по себе, а его устойчивость:
+                  сколько предприятие зарабатывает, как быстро растет и хватает ли ему
+                  финансовой подушки для работы без перегрузки.
+                </p>
+              </div>
+              <div class="model-note-card">
+                <span>Что вы получаете</span>
+                <strong>Пояснение, риск и следующий шаг</strong>
+                <p>
+                  Вы вводите выручку, прибыль, темп роста выручки и текущую ликвидность.
+                  Затраты и рентабельность система рассчитывает сама, после чего объясняет,
+                  что в показателях поддерживает устойчивость бизнеса, что ее ослабляет
+                  и на что стоит посмотреть в первую очередь.
+                </p>
+              </div>
+            </div>
+            <form id="analysis-form" class="analysis-form">
+              <label>
+                Период
+                <input type="month" name="period" required />
+              </label>
+              <label>
+                Выручка
+                <input type="number" min="0.01" step="0.01" name="revenue" placeholder="Например, 8000000" required />
+              </label>
+              <label>
+                Прибыль
+                <input type="number" step="0.01" name="profit" placeholder="Например, 1800000" required />
+              </label>
+              <label>
+                Темп роста выручки, %
+                <input type="number" step="0.01" name="revenue_growth" placeholder="Например, 12" required />
+              </label>
+              <label>
+                Текущая ликвидность
+                <input type="number" min="0.01" step="0.01" name="liquidity_ratio" placeholder="Например, 1.35" required />
+              </label>
+              <button class="primary-button" type="submit">Рассчитать</button>
+            </form>
+            <div class="derived-preview" id="derived-preview">
+              <div class="derived-card">
+                <span>Затраты</span>
+                <strong id="derived-costs">0</strong>
+              </div>
+              <div class="derived-card">
+                <span>Рентабельность</span>
+                <strong id="derived-profitability">0 %</strong>
+              </div>
+              <div class="derived-card">
+                <span>Что именно считаем</span>
+                <strong>Эффективность, устойчивость и темп развития</strong>
+              </div>
+            </div>
+            <p id="analysis-hint" class="muted">
+              Выберите предприятие, затем заполните форму. В этой версии затраты считаются автоматически как выручка минус прибыль, а рентабельность как прибыль к затратам.
+            </p>
+          </section>
+
+          <section class="panel result-panel" id="result-panel" hidden>
+            <div class="section-head">
+              <h3>Результат анализа</h3>
+              <span class="badge" id="result-badge"></span>
+            </div>
+            <div class="model-summary" id="model-summary"></div>
+            <div class="result-grid">
+              <div class="result-main">
+                <div class="score-ring">
+                  <div class="score-ring-inner">
+                    <strong id="result-score">0</strong>
+                    <span>баллов</span>
+                  </div>
+                </div>
+                <div>
+                  <h4 id="result-title"></h4>
+                  <p id="result-comment"></p>
+                  <p class="muted" id="result-explanation"></p>
+                </div>
+              </div>
+              <div class="metrics" id="result-metrics"></div>
+            </div>
+            <div class="insight-grid" id="decision-insights"></div>
+            <div class="fuzzy-map">
+              <div class="section-head">
+                <h4>Как система увидела показатели</h4>
+                <p class="muted">По каждому показателю видно, к какому уровню он ближе сейчас: низкому, среднему или высокому.</p>
+              </div>
+              <div id="membership-grid" class="membership-grid"></div>
+            </div>
+            <div class="rules-block">
+              <h4>Что повлияло на оценку</h4>
+              <div id="rules-list" class="rules-list"></div>
+            </div>
+          </section>
+
+          <section class="panel">
+            <div class="section-head">
+              <h3>История анализов</h3>
+              <p class="muted">Все выполненные расчеты по выбранному предприятию.</p>
+            </div>
+            <div id="history-empty" class="empty-state">
+              История пока пуста.
+            </div>
+            <div class="history-table-wrap" id="history-wrap" hidden>
+              <table class="history-table">
+                <thead>
+                  <tr>
+                    <th>Дата</th>
+                    <th>Период</th>
+                    <th>Оценка</th>
+                    <th>Баллы</th>
+                    <th>Комментарий</th>
+                  </tr>
+                </thead>
+                <tbody id="history-body"></tbody>
+              </table>
+            </div>
+          </section>
+        </section>
+      </main>
+    </div>
+
+    <dialog id="enterprise-dialog" class="dialog">
+      <form id="enterprise-form" class="dialog-form" method="dialog">
+        <div class="section-head">
+          <h3 id="dialog-title">Новое предприятие</h3>
+          <button type="button" class="icon-button" id="close-dialog">×</button>
+        </div>
+        <label>
+          Название
+          <input type="text" name="name" maxlength="120" required />
+        </label>
+        <label>
+          Профиль оценки
+          <select name="profile_code" required>
+            <option value="default">Универсальный</option>
+            <option value="manufacturing">Производство / машиностроение</option>
+            <option value="trade">Торговля</option>
+            <option value="services">Услуги / IT / сервис</option>
+          </select>
+        </label>
+        <label>
+          Форма собственности
+          <input type="text" name="ownership" maxlength="120" required />
+        </label>
+        <label>
+          Краткое описание
+          <textarea name="description" rows="5" maxlength="800" required></textarea>
+        </label>
+        <div class="dialog-actions">
+          <button type="button" class="ghost-button" id="cancel-dialog">Отмена</button>
+          <button type="submit" class="primary-button">Сохранить</button>
+        </div>
+      </form>
+    </dialog>
+
+    <div id="toast" class="toast" hidden></div>
+
+    <script type="module" src="/static/js/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,57 @@
+@media (max-width: 1080px) {
+  .hero,
+  .workspace,
+  .result-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    position: static;
+  }
+
+  .analysis-form {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .model-note,
+  .model-summary,
+  .membership-grid,
+  .insight-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .derived-preview {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .page-shell {
+    width: min(100% - 20px, 100%);
+    padding-top: 16px;
+  }
+
+  .hero-copy,
+  .hero-panel,
+  .panel,
+  .sidebar {
+    padding: 20px;
+  }
+
+  .analysis-form,
+  .info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .result-main,
+  .content-top,
+  .section-head,
+  .dialog-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .score-ring {
+    width: min(180px, 100%);
+  }
+}

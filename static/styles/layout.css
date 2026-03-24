@@ -1,0 +1,249 @@
+.page-shell {
+  width: min(1380px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 28px 0 48px;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: 1.35fr 0.85fr;
+  gap: 24px;
+  align-items: stretch;
+  margin-bottom: 24px;
+}
+
+.hero-copy,
+.hero-panel,
+.sidebar,
+.panel {
+  backdrop-filter: blur(18px);
+  background: var(--surface);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: var(--shadow);
+}
+
+.hero-copy {
+  padding: 34px;
+  border-radius: var(--radius-xl);
+}
+
+.hero h1 {
+  font-size: clamp(2.2rem, 4vw, 4.1rem);
+  line-height: 1.03;
+  max-width: 14ch;
+}
+
+.hero-text {
+  max-width: 62ch;
+  margin-top: 18px;
+  color: var(--muted);
+}
+
+.hero-actions {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  margin-top: 28px;
+  flex-wrap: wrap;
+}
+
+.hero-panel {
+  border-radius: var(--radius-xl);
+  padding: 22px;
+  display: grid;
+  gap: 16px;
+  align-content: center;
+  background:
+    linear-gradient(145deg, rgba(17, 71, 61, 0.95), rgba(31, 111, 95, 0.78)),
+    var(--surface);
+  color: #f8f4ea;
+}
+
+.stat-card {
+  padding: 18px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.stat-card span {
+  display: block;
+  font-size: 0.92rem;
+  opacity: 0.86;
+  margin-bottom: 8px;
+}
+
+.stat-card strong {
+  font-size: 2rem;
+  font-family: Georgia, "Iowan Old Style", serif;
+}
+
+.workspace {
+  display: grid;
+  grid-template-columns: 320px minmax(0, 1fr);
+  gap: 24px;
+}
+
+.sidebar {
+  border-radius: var(--radius-xl);
+  padding: 18px;
+  height: fit-content;
+  position: sticky;
+  top: 20px;
+}
+
+.content {
+  display: grid;
+  gap: 18px;
+}
+
+.content-top,
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.content-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.panel {
+  border-radius: var(--radius-xl);
+  padding: 24px;
+}
+
+.eyebrow {
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.enterprise-list {
+  display: grid;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.enterprise-card {
+  padding: 16px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
+}
+
+.enterprise-card:hover,
+.enterprise-card.active {
+  transform: translateY(-1px);
+  border-color: rgba(17, 71, 61, 0.22);
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.enterprise-card h3 {
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+}
+
+.meta-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+.tag,
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 0.84rem;
+  background: rgba(31, 111, 95, 0.1);
+  color: var(--accent-strong);
+}
+
+.badge.low,
+.tag.low {
+  background: rgba(157, 57, 50, 0.12);
+  color: var(--danger);
+}
+
+.badge.satisfactory,
+.tag.satisfactory {
+  background: rgba(184, 109, 27, 0.14);
+  color: var(--warn);
+}
+
+.badge.good,
+.tag.good {
+  background: rgba(31, 111, 95, 0.12);
+  color: var(--accent);
+}
+
+.badge.high,
+.tag.high {
+  background: rgba(17, 71, 61, 0.16);
+  color: var(--accent-strong);
+}
+
+.primary-button,
+.ghost-button,
+.danger-button,
+.secondary-link,
+.icon-button {
+  border: none;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 160ms ease, opacity 160ms ease, background 160ms ease;
+}
+
+.primary-button,
+.ghost-button,
+.danger-button {
+  padding: 12px 16px;
+  border-radius: 999px;
+  font-weight: 700;
+}
+
+.primary-button {
+  background: var(--accent);
+  color: #fff8ef;
+}
+
+.ghost-button {
+  background: rgba(36, 23, 15, 0.06);
+  color: var(--text);
+}
+
+.danger-button {
+  background: rgba(157, 57, 50, 0.12);
+  color: var(--danger);
+}
+
+.secondary-link {
+  color: var(--accent-strong);
+  font-weight: 700;
+}
+
+.primary-button:hover,
+.ghost-button:hover,
+.danger-button:hover,
+.secondary-link:hover,
+.icon-button:hover {
+  transform: translateY(-1px);
+  opacity: 0.94;
+}
+
